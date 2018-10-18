@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 
-const LOGO = require('../../images/Logo.png');
+const LOGO = require('../../images/Logo_horiz.png');
 
 export default ({title}) => (
     <View style={styles.container}>
@@ -20,15 +20,19 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'flex-start',
         alignItems: 'center',
-        marginBottom: 16,
+        position: 'relative',
     },
     logo: {
-        height: 256,
+        width: 232,
+        height: 64,
         marginTop: 50,
     },
     title: {
+        position: 'absolute',
+        bottom: 0, 
+        right: -1,
         textAlign: 'center',
-        fontSize: 10,
+        fontSize: 8.5,
         marginTop: 8,
         color: '#ebebff',
         fontFamily: 'Open Sans',

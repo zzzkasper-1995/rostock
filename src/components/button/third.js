@@ -1,8 +1,8 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
-import Svg, { Defs, Mask, Rect, LinearGradient, RadialGradient, Path, Ellipse, Stop,Text, Use, Circle, G, Line } from 'react-native-svg';
+import Svg, { Defs, Rect, LinearGradient, RadialGradient, Path, Stop,} from 'react-native-svg';
 
-export default class NewTest extends React.Component {
+export default class ThirdButton extends React.PureComponent {
     render = () => {
         //get the shadow settings and give them default values
         const {
@@ -44,39 +44,28 @@ export default class NewTest extends React.Component {
                         left:0,
                     }}
                 >
-
-                    {/**линия тени*/}
-                    <Path
-                        d={`M ${border} ${outerWidth},
-                            Q ${border} ${2*border} ${outerWidth} ${border-1},
-                            v ${border},
-                            q ${-radius+2*border} ${border} ${-radius} ${radius},
-                            h ${0},z
-                        `}
-                        fill={shadowColor}
-                    />
-                    <Path
-                        d={`M ${outerWidth} ${border-1},
-                            h ${width-2*outerWidth},
-                            v ${border},
-                            h ${-width+2*outerWidth},
-                            v ${-border},z
-                        `}
-                        fill={shadowColor}
-                    /> 
-                    <Path
-                        d={`
-                            M ${width-outerWidth} ${border-1},
-                            q ${outerWidth+border} ${0} ${outerWidth+border} ${outerWidth},
-                            q ${-border} ${-outerWidth+border} ${-outerWidth-border} ${-outerWidth+border},
-                            v ${-border},z`
-                        }
-                        fill={shadowColor}
-                    />
-                    
-                    {paintBorder(borderColor, border, radius, width, height)}
-
-                    
+                    <Defs>
+                        <LinearGradient
+                            id="grad"
+                            x1={0}
+                            y1={0}
+                            x2={0}
+                            y2={3/4*height}
+                            gradientUnits="userSpaceOnUse"
+                        >
+                            <Stop
+                                offset="0"
+                                stopColor={backgroundColor.start}
+                                stopOpacity="1"
+                            />
+                            <Stop
+                                offset="1"
+                                stopColor={backgroundColor.end}
+                                stopOpacity="1"
+                            />
+                        </LinearGradient>
+                    </Defs>
+                    {paintBorder(borderColor, border, radius, width, height, "url(#grad)")}     
                 </Svg>
                 {children}
             </TouchableOpacity>
@@ -85,15 +74,15 @@ export default class NewTest extends React.Component {
 }
 
 /**тройная рамка*/
-const paintBorder = (borderColor, border, radius, width, height) => {
+const paintBorder = (borderColor, border, radius, width, height, backgroundColor) => {
     return borderColor.map((color, index) => (
         <Rect
             x={(index+1)*border}
-            y={(index+2)*border}
+            y={(index+1)*border}
             width={width-index*2*border}
             height={height-index*2*border}
             rx={radius-index*border}
-            fill="none"
+            fill={backgroundColor}
             stroke={color}
             strokeWidth={border}
             key={index+color}

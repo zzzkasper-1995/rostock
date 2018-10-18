@@ -78,13 +78,13 @@ export default class LogIn extends PureComponent {
         return () => thisState.setState({ isKeyboard: false });
     }
 
-    animate(speed=200) {
+    animate(speed=150) {
         this.animatedValue.setValue(0);
         Animated.timing(this.animatedValue, {
             toValue: 1,
             duration: speed,
             easing: Easing.linear,
-            useNativeDriver: false,
+            useNativeDriver: true,
         }).start();
     }
 
@@ -97,18 +97,24 @@ export default class LogIn extends PureComponent {
 
     render() {
         const {pasFocus, loginFocus, willKeyboard} = this.state;
+        const { navigate } = this.props.navigation
 
-        const movingMargin = this.animatedValue.interpolate({
-            inputRange: [0, 0.2, 1],
-            outputRange: willKeyboard ?
-                [0, 0, -250] : [-250, -250, 0],
-        });
+        const position= {
+            transform: [
+              {
+                translateY: this.animatedValue.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: willKeyboard ? [0, -250] : [-250, 0]
+                })
+              }
+            ]
+          };
 
         return (
             <View style={styles.container}>
                 <Background />
-                <Animated.View style={[styles.container, { marginTop: movingMargin }]}>
-                    <Header />
+                <Animated.View style={[styles.container, position]}>
+                    <Header title="Платформа рекламного распространения"/>
                     <View style={styles.content}>
                         <TextInput
                             style={this.textInputStyleCalculator(loginFocus)}
@@ -125,12 +131,12 @@ export default class LogIn extends PureComponent {
                             placeholder="Пароль"
                             onFocus={() => this.setState({pasFocus: true, loginFocus: false})}
                         />
-                        <Button type="primary" setting={primaryOpt} action={()=>{}}>
+                        <Button type="primary" setting={primaryOpt} action={() => navigate("LogInConfirm", {screen: "LogInConfirm"})}>
                             <Text style={styles.primaryTextButton}>
                                 Войти
                             </Text>
                         </Button>
-                        <Button type="secondary" setting={secondaryOpt} action={()=>{}}>
+                        <Button type="secondary" setting={secondaryOpt} action={() => navigate("LogInConfirm", {screen: "LogInConfirm"})}>
                             <Text style={styles.secondaryTextButton}>
                                 Новый пользователь
                             </Text>
