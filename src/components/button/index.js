@@ -4,6 +4,7 @@ import {Text} from 'react-native'
 import PrimaryButton from './primary'
 import SecondaryButton from './secondary'
 import ThirdButton from './third'
+import FourthButton from './fourth'
 
 export default ({type, setting, children, action}) => {
     switch (type) {
@@ -22,6 +23,11 @@ export default ({type, setting, children, action}) => {
             <ThirdButton setting={setting} action={action}>
                 {children}
             </ThirdButton>)
+        case 'fourth':
+            return (
+            <FourthButton setting={setting} action={action}>
+                {children}
+            </FourthButton>)
         default:
         return (
           <PrimaryButton setting={setting} action={action}>

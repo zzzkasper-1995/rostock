@@ -9,26 +9,26 @@ export default () => (
         <Svg width={width} height={height} style={{position: 'absolute', top: 0, left: 0}}>         
             <Defs>
                 <RadialGradient id="gradTop"
-                    cx={width*0.5} cy={0}
-                    rx={width*0.75} ry={height*0.6}
+                    cx={width*0.5} cy={0.2*height}
+                    rx={width*0.75} ry={height*0.4}
                     fx={width*0.5} fy={0}
                     gradientUnits="userSpaceOnUse"
                 >
                     <Stop
                         offset="0"
-                        stopColor="#3087c5"
+                        stopColor="#3391c5"
                         stopOpacity="1"
                     />
                     <Stop
                         offset="1"
-                        stopColor="#1F394A"
+                        stopColor="#1b2936"
                         stopOpacity="1"
                     />
                 </RadialGradient>
                 <RadialGradient id="gradBottom"
-                    cx={width*0.5} cy={0.9*height}
+                    cx={width*0.5} cy={height}
                     rx={width*0.75} ry={height*0.3}
-                    fx={width} fy={0}
+                    fx={width} fy={height}
                     gradientUnits="userSpaceOnUse"
                 >
                     <Stop
@@ -38,7 +38,7 @@ export default () => (
                     />
                     <Stop
                         offset="1"
-                        stopColor="#1F394A"
+                        stopColor="#1b2936"
                         stopOpacity="1"
                     />
                 </RadialGradient>

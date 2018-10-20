@@ -1,8 +1,7 @@
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { compose, setDisplayName, pure } from 'recompose';
-import Main from '../components/main';
+import MainScreen from '../components/mainScreen';
 
 function stateToProps(state) {
     return {
@@ -14,7 +13,7 @@ function dispatchToProps(dispatch) {
     };
 }
 export default compose(
-    setDisplayName('Main'),
+    setDisplayName('MainScreen'),
     connect(stateToProps, dispatchToProps),
     pure,
-)(Main);
+)(MainScreen);

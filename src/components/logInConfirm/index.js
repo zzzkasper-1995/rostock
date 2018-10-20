@@ -124,6 +124,7 @@ export default class LogInConfirm extends PureComponent {
                         underlineColorAndroid="transparent"
                         keyboardType='numeric'
                         onChangeText={(text) => text.length === 4 && Keyboard.dismiss()}
+                        maxLength={4}
                         onFocus={() => this.setState({keyFocus: true})}
                         onBlur={() => this.setState({keyFocus: false})}
                     />
